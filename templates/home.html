@@ -1,0 +1,91 @@
+{% extends "base.html"%} {% block title %}Home{% endblock %} {% block content
+%}
+
+<h1 align="center">Notes</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for note in user.notes %}
+  <li class="list-group-item">
+    {{ note.data }}
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+
+
+  <h2 align="center">My Courses</h2>
+    {% for course in user.mycourses %}
+  <li class="list-group-item">
+    {{ course.DateAdded }}
+    <button type="button" class="close" onClick="deleteCourse({{ course.courseId }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+    {% endfor %}
+</ul>
+
+<ul>
+  <h2 align="center">My Courses</h2>
+  <table class="GeneratedTable">
+  <thead>
+    <tr>
+      <th>Course ID</th>
+      <th>Date Added</th>
+      <th>Date Last Updated</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for course in user.mycourses %}
+    <tr>
+      <td>{{ course.courseId }}</td>
+      <td>{{ course.DateAdded }}</td>
+      <td>{{ course.DateLastUpdated }}</td>
+    </tr>
+      {% endfor %}
+      </tbody>
+</table>
+</ul>
+
+<ul>
+  <h2 align="center">Courses Available</h2>
+  <table class="GeneratedTable">
+  <thead>
+    <tr>
+      <th>Course ID</th>
+      <th>Sub Category</th>
+      <th>Course Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for course in courses %}
+    <tr>
+      <td>{{ course.courseId }}</td>
+      <td>{{ course.subcategory }}</td>
+      <td>{{ course.courseDescr }}</td>
+    </tr>
+      {% endfor %}
+      </tbody>
+</table>
+</ul>
+
+
+<form method="POST">
+  <br />
+  <br />
+  <br />
+  <br />
+   <textarea name="course" id="course" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add course</button>
+  </div>
+
+    <textarea name="note" id="note" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Note</button>
+  </div>
+
+</form>
+
+{% endblock %}
