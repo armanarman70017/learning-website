@@ -1,8 +1,9 @@
 from flask import Flask
 from flask.templating import render_template
+from database import load_jobs_from_db
 
 app = Flask(__name__)
-
+'''
 JOBS = [{
     'id': 1,
     'title': 'Data Scientist',
@@ -14,11 +15,13 @@ JOBS = [{
     'location': 'New Delhi',
     'salary': '$500'
 }]
+'''
 
 
 @app.route('/')
 def hello_world():
-  return render_template('DemoHome.html', jobs=JOBS)
+  jobs = load_jobs_from_db()
+  return render_template('DemoHome.html', jobs=jobs)
 
 
 if __name__ == '__main__':
